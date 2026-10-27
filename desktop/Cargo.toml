@@ -15,7 +15,7 @@ ureq = { version = "3", default-features = false, features = ["rustls", "json"] 
 libloading = "0.9"
 mdns-sd = "0.21"
 open = "5"
-lz4_flex = { version = "0.11", default-features = false, features = ["safe-encode", "safe-decode"] }
+lz4_flex = { version = "0.14", default-features = false, features = ["safe-encode", "safe-decode"] }
 socket2 = "0.6"
 hmac = "0.12"
 sha2 = "0.10"
