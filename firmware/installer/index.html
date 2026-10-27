@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Установка LEDCAST</title>
+<meta name="description" content="Установка прошивки LEDCAST на контроллер Huidu HD-WF2 прямо из браузера.">
+<link rel="stylesheet" href="tokens.css">
+<script type="module" src="https://unpkg.com/esp-web-tools@10.4.0/dist/web/install-button.js"></script>
+<style>
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--canvas);
+    color: var(--ink);
+    font: 16px/1.55 var(--sans);
+  }
+  main { max-width: 720px; margin: 0 auto; padding: var(--space-6) var(--space-4) 64px; }
+  .eyebrow { margin: 0 0 var(--space-2); color: var(--accent); font: 600 12px/1 var(--mono); letter-spacing: .12em; }
+  h1 { margin: 0 0 var(--space-3); font-size: 40px; line-height: 1.1; letter-spacing: -.02em; }
+  h2 { margin: 0 0 var(--space-3); font-size: 18px; }
+  p { margin: 0 0 var(--space-3); color: var(--ink-muted); }
+  .lead { font-size: 18px; }
+  .panel {
+    margin-top: var(--space-5);
+    padding: var(--space-5);
+    background: var(--surface-1);
+    border: 1px solid var(--hairline);
+    border-radius: var(--panel-radius);
+  }
+  ol { margin: 0; padding-left: 20px; color: var(--ink-muted); }
+  li { margin-bottom: var(--space-2); }
+  li b { color: var(--ink); font-weight: 600; }
+  code { font: 14px var(--mono); color: var(--ink); background: var(--surface-3); padding: 1px 6px; border-radius: 4px; }
+  .install { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-4); }
+  .version { color: var(--ink-subtle); font: 13px var(--mono); }
+  esp-web-install-button button[slot="activate"] {
+    height: var(--control-height);
+    padding: 0 var(--space-5);
+    border: 0;
+    border-radius: var(--control-radius);
+    background: var(--accent);
+    color: #fff;
+    font: 600 15px var(--sans);
+    cursor: pointer;
+    transition: background var(--motion-fast);
+  }
+  esp-web-install-button button[slot="activate"]:hover { background: var(--accent-hover); }
+  .notice { color: var(--warning); }
+  a { color: var(--accent-hover); }
+  @media (max-width: 560px) { h1 { font-size: 32px; } .panel { padding: var(--space-4); } }
+</style>
+</head>
+<body>
+<main>
+  <p class="eyebrow">LEDCAST · ПРОШИВКА</p>
+  <h1>Установка на HD‑WF2</h1>
+  <p class="lead">Прошивка ставится прямо из браузера — без Python, esptool и драйверов.
+    Нужны Chrome или Edge на компьютере, кабель USB‑A ↔ USB и блок питания 5 В.</p>
+
+  <section class="panel">
+    <h2>Подготовка</h2>
+    <ol>
+      <li><b>Подайте питание 5 В на клеммник.</b> От USB плата не питается.</li>
+      <li><b>Переведите плату в режим загрузки:</b> замкните пад <code>GPIO0</code> на <code>GND</code>,
+        включите питание, разомкните.</li>
+      <li><b>Соедините</b> разъём USB‑A платы с компьютером.</li>
+    </ol>
+  </section>
+
+  <section class="panel">
+    <h2>Установка</h2>
+    <p>Выберите в списке порт платы. При первой установке поверх заводской прошивки Huidu
+      согласитесь стереть устройство — старые данные во flash мешают загрузке. Установка отсюда
+      всегда начинает с заводских настроек LEDCAST; чтобы обновить работающую строку и сохранить
+      её сеть и модули, загрузите <code>*-ota.bin</code> в её веб‑интерфейсе.</p>
+    <div class="install">
+      <esp-web-install-button manifest="manifest.json">
+        <button slot="activate">Установить LEDCAST</button>
+        <span slot="unsupported" class="notice">Браузер не поддерживает Web Serial. Откройте страницу в Chrome или Edge на компьютере.</span>
+        <span slot="not-allowed" class="notice">Страница должна быть открыта по HTTPS.</span>
+      </esp-web-install-button>
+      <span class="version" id="version"></span>
+    </div>
+  </section>
+
+  <section class="panel">
+    <h2>После установки</h2>
+    <ol>
+      <li>Перезагрузите плату по питанию.</li>
+      <li>Подключитесь к сети <code>LEDCAST-XXXX</code>, пароль <code>88888888</code>.
+        Страница настройки откроется сама или по адресу <code>http://192.168.4.1</code>.</li>
+      <li>Выберите свою Wi‑Fi‑сеть и задайте модули. Следующие обновления ставятся из
+        веб‑интерфейса контроллера.</li>
+    </ol>
+  </section>
+
+  <p style="margin-top: var(--space-5)">Файлы прошивки, контрольные суммы и LEDCAST Console —
+    на странице <a id="releases" href="https://github.com/">релизов</a>.</p>
+</main>
+<script>
+  fetch('manifest.json').then(function (r) { return r.json(); }).then(function (m) {
+    document.getElementById('version').textContent = 'версия ' + m.version;
+  }).catch(function () {});
+  var repo = location.hostname.endsWith('.github.io')
+    ? 'https://github.com/' + location.hostname.split('.')[0] + location.pathname.split('/').slice(0, 2).join('/') + '/releases/latest'
+    : null;
+  if (repo) document.getElementById('releases').href = repo;
+</script>
+</body>
+</html>

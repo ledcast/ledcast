@@ -1,0 +1,20 @@
+menu "ESP32 HUB75 Configuration"
+
+  config ESP32_HUB75_USE_GFX
+      bool "Use Adafruit GFX library."
+      default y
+      help
+          This option enables use of the Adafruit GFX library using the `Adafruit-GFX-Library` component.
+
+  # Обмен копиями кадра ждёт извещения GDMA о конце прохода кольца, а канал
+  # заказан с isr_cache_safe. Этого мало: пока диспетчер прерываний самого
+  # драйвера GDMA лежит во флеше, извещение при отключённом кэше не дойдёт —
+  # то есть ровно во время записи во флеш. Опции без вопроса, потому что выбора
+  # тут нет: без неё двойная буферизация ломается на каждом сохранении настроек.
+  config ESP32_HUB75_GDMA_ISR_IN_IRAM
+      bool
+      default y
+      depends on IDF_TARGET_ESP32S3
+      select GDMA_ISR_HANDLER_IN_IRAM
+
+endmenu

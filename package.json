@@ -1,0 +1,13 @@
+{
+  "name": "ledcast-web",
+  "private": true,
+  "workspaces": [
+    "firmware/web",
+    "desktop/web"
+  ],
+  "scripts": {
+    "build": "npm run build --workspaces",
+    "typecheck": "npm run typecheck --workspaces",
+    "test": "node --test \"firmware/web/src/**/*.test.ts\" \"firmware/web/dev/**/*.test.ts\" \"desktop/web/src/**/*.test.ts\""
+  }
+}

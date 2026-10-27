@@ -1,0 +1,9 @@
+.panel {
+  width: min(100vw, calc(var(--prime-space-24) * 3.5));
+}
+
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--prime-space-2);
+}

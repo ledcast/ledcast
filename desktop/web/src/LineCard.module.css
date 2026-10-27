@@ -1,0 +1,29 @@
+/* Превью во всю ширину карточки; высота — по пропорциям вывода строки. */
+.preview {
+  display: grid;
+  place-items: center;
+  background: var(--prime-color-fill-muted);
+}
+
+.canvas,
+.empty {
+  grid-area: 1 / 1;
+}
+
+.canvas {
+  display: block;
+  width: 100%;
+  height: auto;
+  image-rendering: pixelated;
+  opacity: 0;
+  transition: opacity var(--prime-motion-duration-base) var(--prime-motion-easing-standard);
+}
+
+.preview[data-frame] .canvas {
+  opacity: 1;
+}
+
+.empty {
+  padding: var(--prime-space-3);
+  text-align: center;
+}

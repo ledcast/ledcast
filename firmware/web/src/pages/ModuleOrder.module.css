@@ -1,0 +1,35 @@
+/* Плитки модулей переносятся по сетке; промежуток занимает ячейку. */
+.grid {
+  --dnd-sortable-gap: var(--prime-space-2);
+
+  grid-template-columns: repeat(auto-fill, minmax(var(--prime-space-20), 1fr));
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* Плитка — заливка на карточке, без рамки: заливка читается как «можно взять». */
+.tile {
+  display: flex;
+  flex-direction: column;
+  gap: var(--prime-space-1);
+  min-width: 0;
+  padding: var(--prime-space-2);
+  border-radius: var(--prime-radius-m);
+  background: var(--prime-color-layer-nested);
+  box-shadow: var(--prime-shadow-raised);
+  cursor: grab;
+}
+
+.head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--prime-space-1);
+  padding-inline-start: var(--prime-space-1);
+}
+
+.toggles {
+  display: flex;
+  gap: var(--prime-space-1);
+}

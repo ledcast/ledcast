@@ -1,0 +1,27 @@
+# OS and editors
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.swp
+
+# Web UI (Node)
+node_modules/
+
+# Local agent settings
+.claude/settings.local.json
+
+# Firmware (ESP-IDF)
+firmware/build/
+firmware/managed_components/
+firmware/sdkconfig
+firmware/sdkconfig.old
+firmware/web/dist/
+firmware/dist/
+build-host/
+
+# Desktop (Rust + Tauri)
+desktop/target/
+desktop/dist/
+desktop/gen/
+desktop/web/dist/

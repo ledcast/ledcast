@@ -1,0 +1,10 @@
+/* Строки одна под другой, каждая на всю ширину. */
+.lines {
+  display: flex;
+  flex-direction: column;
+  gap: var(--prime-space-4);
+}
+
+.previewSkeleton {
+  min-height: var(--prime-space-16);
+}

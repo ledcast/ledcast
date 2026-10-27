@@ -1,0 +1,7 @@
+.page {
+  display: grid;
+  place-items: center;
+  min-height: 100dvh;
+  padding: var(--prime-space-4);
+  background: var(--prime-color-layer-current);
+}

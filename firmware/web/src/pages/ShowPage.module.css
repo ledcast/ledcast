@@ -1,0 +1,3 @@
+.textSkeleton {
+  min-height: calc(var(--prime-space-24) * 2);
+}
