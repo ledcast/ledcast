@@ -17,7 +17,7 @@ mdns-sd = "0.21"
 open = "5"
 lz4_flex = { version = "0.11", default-features = false, features = ["safe-encode", "safe-decode"] }
 socket2 = "0.6"
-hmac = "0.12"
+hmac = "0.13"
 sha2 = "0.10"
 dns-lookup = "2"
 
